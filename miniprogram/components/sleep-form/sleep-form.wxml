@@ -1,0 +1,36 @@
+<view class="sleep-form">
+  <view class="form-item">
+    <view class="form-label">记录类型</view>
+    <view class="mode-grid">
+      <view class="mode-btn {{sleepMode === 'start' ? 'mode-btn-active' : ''}}" bindtap="setMode" data-mode="start">
+        <text class="mode-icon">🌙</text><text class="mode-text">入睡</text>
+      </view>
+      <view class="mode-btn {{sleepMode === 'end' ? 'mode-btn-active' : ''}}" bindtap="setMode" data-mode="end">
+        <text class="mode-icon">☀️</text><text class="mode-text">醒来</text>
+      </view>
+      <view class="mode-btn {{sleepMode === 'both' ? 'mode-btn-active' : ''}}" bindtap="setMode" data-mode="both">
+        <text class="mode-icon">😴</text><text class="mode-text">完整记录</text>
+      </view>
+    </view>
+  </view>
+  <view class="form-item" wx:if="{{sleepMode === 'both'}}">
+    <view class="form-label">入睡时间</view>
+    <picker mode="time" value="{{startTime}}" bindchange="onStartTimeChange">
+      <view class="time-picker">{{startTime || '点击选择'}}</view>
+    </picker>
+  </view>
+  <view class="form-item" wx:if="{{sleepMode === 'both'}}">
+    <view class="form-label">醒来时间</view>
+    <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+      <view class="time-picker">{{endTime || '点击选择'}}</view>
+    </picker>
+  </view>
+  <view class="form-item">
+    <view class="form-label">睡眠质量</view>
+    <view class="quality-grid">
+      <view class="quality-btn {{quality === 'good' ? 'quality-btn-active' : ''}}" bindtap="setQuality" data-val="good">😴 睡得好</view>
+      <view class="quality-btn {{quality === 'normal' ? 'quality-btn-active' : ''}}" bindtap="setQuality" data-val="normal">😐 一般</view>
+      <view class="quality-btn {{quality === 'restless' ? 'quality-btn-active' : ''}}" bindtap="setQuality" data-val="restless">😬 不安稳</view>
+    </view>
+  </view>
+</view>

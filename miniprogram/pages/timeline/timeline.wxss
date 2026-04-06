@@ -1,0 +1,76 @@
+/* 时间线页样式 */
+.timeline-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 日期选择器 */
+.date-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24rpx 32rpx;
+  background: var(--bg-card);
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.date-arrow {
+  width: 80rpx; height: 80rpx; display: flex;
+  align-items: center; justify-content: center;
+}
+.arrow-text { font-size: 48rpx; color: var(--text-secondary); font-weight: 300; }
+.date-center {
+  display: flex; align-items: center; gap: 12rpx;
+  position: relative;
+}
+.date-text { font-size: var(--font-size-xl); font-weight: 600; color: var(--text-primary); }
+.date-weekday { font-size: var(--font-size-sm); color: var(--text-hint); }
+.date-picker-hint {
+  font-size: 24rpx; margin-left: 4rpx;
+  position: absolute; right: -28rpx; top: 50%; transform: translateY(-50%);
+}
+
+/* 日期摘要 */
+.day-summary {
+  display: flex; margin: 16rpx 24rpx;
+  background: var(--bg-card); border-radius: var(--border-radius-lg);
+  padding: 16rpx 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.03);
+}
+.summary-item {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6rpx;
+}
+.summary-icon { font-size: 28rpx; }
+.summary-value { font-size: var(--font-size-md); font-weight: 600; color: var(--text-primary); }
+.summary-unit { font-size: var(--font-size-xs); color: var(--text-hint); }
+
+/* 筛选器 */
+.filter-bar {
+  padding: 12rpx 0; background: var(--bg-card);
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.03);
+}
+.filter-scroll { white-space: nowrap; }
+.filter-tabs {
+  display: inline-flex; gap: 12rpx; padding: 0 24rpx;
+}
+.filter-tab {
+  display: inline-block; padding: 10rpx 24rpx;
+  border-radius: var(--border-radius-xl);
+  background: var(--bg-primary);
+  font-size: var(--font-size-sm); color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+.filter-tab-active {
+  background: rgba(255, 140, 107, 0.12); color: var(--color-primary); font-weight: 600;
+}
+
+/* 记录列表 */
+.records-list {
+  padding: 16rpx 24rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  padding: 24rpx; text-align: center;
+}
+.load-text { font-size: var(--font-size-xs); color: var(--text-hint); }
+
+

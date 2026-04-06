@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/timeline/timeline",
+    "pages/report/report",
+    "pages/mine/mine",
+    "pages/add-record/add-record",
+    "pages/record-detail/record-detail",
+    "pages/family/family",
+    "pages/baby-edit/baby-edit",
+    "pages/invite/invite",
+    "pages/identity-edit/identity-edit",
+    "pages/privacy/privacy"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FFF9F6",
+    "navigationBarTitleText": "宝贝日记",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF9F6",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF8C6B",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/timeline/timeline",
+        "text": "时间线",
+        "iconPath": "images/tab-timeline.png",
+        "selectedIconPath": "images/tab-timeline-active.png"
+      },
+      {
+        "pagePath": "pages/report/report",
+        "text": "报告",
+        "iconPath": "images/tab-report.png",
+        "selectedIconPath": "images/tab-report-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/tab-mine.png",
+        "selectedIconPath": "images/tab-mine-active.png"
+      }
+    ]
+  },
+  "cloud": true,
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

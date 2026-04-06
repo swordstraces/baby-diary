@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "宝贝日记",
+  "usingComponents": {
+    "quick-actions": "../../components/quick-actions/quick-actions",
+    "record-card": "../../components/record-card/record-card",
+    "empty-state": "../../components/empty-state/empty-state"
+  },
+  "enablePullDownRefresh": true
+}

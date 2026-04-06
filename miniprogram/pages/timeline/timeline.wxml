@@ -1,0 +1,66 @@
+<view class="timeline-page">
+  <!-- 日期选择器 -->
+  <view class="date-bar">
+    <view class="date-arrow" bindtap="prevDay">
+      <text class="arrow-text">‹</text>
+    </view>
+    <picker mode="date" value="{{currentDate}}" end="{{today}}" bindchange="onDatePick">
+      <view class="date-center">
+        <text class="date-text">{{displayDate}}</text>
+        <text class="date-weekday">{{weekdayText}}</text>
+        <text class="date-picker-hint">📅</text>
+      </view>
+    </picker>
+    <view class="date-arrow" bindtap="nextDay">
+      <text class="arrow-text">›</text>
+    </view>
+  </view>
+
+  <!-- 日期摘要条 -->
+  <view class="day-summary" wx:if="{{daySummary.length > 0}}">
+    <view class="summary-item" wx:for="{{daySummary}}" wx:key="type">
+      <text class="summary-icon">{{item.icon}}</text>
+      <text class="summary-value">{{item.value}}</text>
+      <text class="summary-unit">{{item.unit}}</text>
+    </view>
+  </view>
+
+  <!-- 类型筛选器 -->
+  <view class="filter-bar">
+    <scroll-view scroll-x class="filter-scroll" enhanced show-scrollbar="{{false}}">
+      <view class="filter-tabs">
+        <view class="filter-tab {{filterType === '' ? 'filter-tab-active' : ''}}"
+              bindtap="setFilter" data-type="">
+          全部
+        </view>
+        <view class="filter-tab {{filterType === item.type ? 'filter-tab-active' : ''}}"
+              wx:for="{{typeFilters}}" wx:key="type"
+              bindtap="setFilter" data-type="{{item.type}}">
+          {{item.icon}} {{item.label}}
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 记录列表 -->
+  <view class="records-list">
+    <block wx:if="{{filteredRecords.length > 0}}">
+      <record-card wx:for="{{filteredRecords}}" wx:key="_id" record="{{item}}" bind:delete="onRecordDelete" />
+    </block>
+    <empty-state wx:else
+                 message="{{filterType ? '当日没有该类型记录' : '当天还没有记录'}}"
+                 emoji="📋" />
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{hasMore}}" bindtap="loadMore">
+    <text class="load-text">加载更多</text>
+  </view>
+  <view class="load-more" wx:if="{{loading}}">
+    <text class="load-text">加载中...</text>
+  </view>
+
+  <!-- 隐藏日期选择器 -->
+  <picker mode="date" value="{{currentDate}}" bindchange="onDatePick" id="datePicker" hidden>
+  </picker>
+</view>

@@ -1,0 +1,111 @@
+<view class="report-page">
+  <!-- 日期选择器 -->
+  <view class="date-bar">
+    <view class="date-arrow" bindtap="prevDay">
+      <text class="arrow-text">‹</text>
+    </view>
+    <picker mode="date" value="{{currentDate}}" end="{{today}}" bindchange="onDatePick">
+      <view class="date-center">
+        <text class="date-text">{{displayDate}}</text>
+        <text class="date-weekday">{{weekdayText}}</text>
+        <text class="date-picker-hint">📅</text>
+      </view>
+    </picker>
+    <view class="date-arrow" bindtap="nextDay">
+      <text class="arrow-text">›</text>
+    </view>
+  </view>
+
+  <!-- 无数据提示 -->
+  <view class="empty-state" wx:if="{{trendData.feeding.length === 0 && trendData.sleep.length === 0 && trendData.diaper.length === 0 && !loading}}">
+    <text class="empty-emoji">📊</text>
+    <text class="empty-text">最近{{timeRange}}天没有记录数据</text>
+  </view>
+
+  <!-- 趋势图表 -->
+  <view class="section" wx:if="{{trendData.feeding.length > 0 || trendData.sleep.length > 0 || trendData.diaper.length > 0}}">
+    <!-- 时间范围选择器 -->
+    <view class="time-range-selector">
+      <view
+        class="time-range-item {{timeRange === item ? 'active' : ''}}"
+        wx:for="{{timeRangeOptions}}"
+        wx:key="*this"
+        bindtap="onTimeRangeChange"
+        data-range="{{item}}"
+      >
+        <text class="time-range-text">近{{item}}天</text>
+      </view>
+    </view>
+
+    <view class="trend-section" wx:if="{{trendData.feeding.length > 0}}">
+      <daily-chart title="近{{timeRange}}天喂奶次数" data="{{trendData.feeding}}"
+                   color="#FF8C6B" labels="{{trendLabels}}" height="300" />
+    </view>
+
+    <view class="trend-section" wx:if="{{trendData.sleep.length > 0}}">
+      <daily-chart title="近{{timeRange}}天睡眠时长(h)" data="{{trendData.sleep}}"
+                   color="#7C83FD" labels="{{trendLabels}}" height="300" />
+    </view>
+
+    <view class="trend-section" wx:if="{{trendData.diaper.length > 0}}">
+      <daily-chart title="近{{timeRange}}天换尿布次数" data="{{trendData.diaper}}"
+                   color="#4ECDC4" labels="{{trendLabels}}" height="300" />
+    </view>
+  </view>
+
+  <!-- 与前日对比 -->
+  <view class="section" wx:if="{{comparison.length > 0}}">
+    <view class="section-title">与前一天对比</view>
+    <view class="compare-list">
+      <view class="compare-item" wx:for="{{comparison}}" wx:key="label">
+        <text class="compare-label">{{item.label}}</text>
+        <view class="compare-values">
+          <text class="compare-today">{{item.today}}</text>
+          <text class="compare-diff {{item.diff > 0 ? 'diff-up' : item.diff < 0 ? 'diff-down' : 'diff-same'}}">
+            {{item.diff > 0 ? '↑' : item.diff < 0 ? '↓' : '→'}} {{item.diffText}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 异常提醒 -->
+  <view class="section" wx:if="{{alerts.length > 0}}">
+    <view class="section-title">异常提醒</view>
+    <view class="alert-list">
+      <view class="alert-item" wx:for="{{alerts}}" wx:key="*this">
+        <text class="alert-icon">🔴</text>
+        <text class="alert-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 建议 -->
+  <view class="section" wx:if="{{suggestions.length > 0}}">
+    <view class="section-title">观察 & 建议</view>
+    <view class="suggestion-list">
+      <view class="suggestion-item" wx:for="{{suggestions}}" wx:key="*this">
+        <text class="suggestion-text">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 跳转到详情页的提示 -->
+  <view class="section detail-hint" wx:if="{{trendData.feeding.length > 0 || trendData.sleep.length > 0 || trendData.diaper.length > 0}}">
+    <view class="hint-content">
+      <text class="hint-icon">📋</text>
+      <text class="hint-text">查看当天的详细记录，请前往首页时间线</text>
+    </view>
+  </view>
+
+  <!-- 分享按钮 -->
+  <view class="share-bar" wx:if="{{trendData.feeding.length > 0 || trendData.sleep.length > 0 || trendData.diaper.length > 0}}">
+    <button class="share-btn" bindtap="generateReportImage">
+      {{exportMode ? '💾 保存图片' : '📊 生成长图分享'}}
+    </button>
+  </view>
+
+  <!-- Canvas 用于生成图片（隐藏） -->
+  <canvas type="2d" id="reportCanvas"
+          style="position: fixed; left: -9999rpx; width: {{canvasWidth}}px; height: {{canvasHeight}}px;" />
+</view>

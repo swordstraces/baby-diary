@@ -1,0 +1,53 @@
+# 微信小程序
+.miniprogram-asset/
+node_modules/
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 日志
+*.log
+npm-debug.log*
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 云开发
+cloudfunctions/**/node_modules/
+cloudfunctions/**/.miniprogram-asset/
+
+# 构建产物
+dist/
+build/
+
+# 敏感配置（包含 AppID 和云环境 ID）
+project.config.json
+miniprogram/app.js
+
+# Docker / 自建服务
+.env
+
+# 开发辅助文档（不公开）
+CLAUDE.md
+SECRETS_CONFIG.md
+SECURITY_FIX.md
+clean-secrets.sh
+ASSETS_PREPARATION.md
+AVATAR_TROUBLESHOOTING.md
+CLEANUP_AVATAR_PATHS.md
+DATABASE_INDEXES.md
+DATABASE_INDEX_GUIDE.md
+RELEASE_GUIDE.md
+SCREENSHOT_GUIDE.md
+
+# AI/工作流辅助文件
+.spec-workflow/
+.workbuddy/
+generated-images/
+../
+project.private.config.json

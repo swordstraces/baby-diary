@@ -1,0 +1,9 @@
+{
+  "name": "updateMember",
+  "version": "1.0.0",
+  "description": "更新成员信息（管理员或本人均可调用）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

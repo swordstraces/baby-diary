@@ -1,0 +1,105 @@
+<view class="index-page">
+  <!-- 顶部宝宝状态卡 -->
+  <view class="baby-card">
+    <view class="baby-info" bindtap="goToBabyEdit">
+      <view class="baby-avatar">
+        <image wx:if="{{babyInfo.avatarUrl}}" class="avatar-img" src="{{babyInfo.avatarUrl}}" mode="aspectFill"></image>
+        <text wx:else class="avatar-text">{{babyInfo.gender === 'male' ? '👦' : '👧'}}</text>
+      </view>
+      <view class="baby-detail">
+        <text class="baby-name">{{babyInfo.name || '宝宝'}}</text>
+        <text class="baby-age">{{babyAgeText}}</text>
+      </view>
+    </view>
+    <view class="status-phrase">
+      <text class="phrase-text">{{statusPhrase}}</text>
+    </view>
+  </view>
+
+  <!-- 今日摘要 -->
+  <view class="today-stats" wx:if="{{todayStats}}">
+    <view class="stat-item" wx:for="{{todayStats}}" wx:key="type">
+      <text class="stat-value">{{item.value}}</text>
+      <text class="stat-label">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 快捷记录 -->
+  <view class="section">
+    <quick-actions />
+  </view>
+
+  <!-- 留言板 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">留言板</text>
+      <view class="section-more" bindtap="showCommentInput">+ 写留言</view>
+    </view>
+    <block wx:if="{{recentComments.length > 0}}">
+      <view class="comment-list">
+        <view class="comment-item" wx:for="{{recentComments}}" wx:key="_id">
+          <view class="comment-avatar">
+            <image wx:if="{{item.authorAvatar}}" class="avatar-img" src="{{item.authorAvatar}}" mode="aspectFill"></image>
+            <text wx:else class="avatar-placeholder">{{item.authorIdentity ? item.authorIdentity[0] : '?'}}</text>
+          </view>
+            <view class="comment-content">
+              <view class="comment-header">
+                <text class="comment-author">{{item.authorName || item.authorIdentity}}</text>
+                <view class="comment-meta">
+                  <text class="comment-time">{{item.timeText}}</text>
+                  <!-- 删除按钮：仅管理员可见 -->
+                  <text class="comment-delete" wx:if="{{isAdmin}}" bindtap="deleteComment" data-id="{{item._id}}">🗑️</text>
+                </view>
+              </view>
+              <text class="comment-text">{{item.content}}</text>
+              
+              <!-- 回复列表 -->
+              <view class="replies" wx:if="{{item.replies && item.replies.length > 0}}">
+                <view class="reply-item" wx:for="{{item.replies}}" wx:for-item="reply" wx:key="_id">
+                  <text class="reply-author">{{reply.authorName || reply.authorIdentity}}</text>
+                  <text class="reply-text">{{reply.content}}</text>
+                </view>
+              </view>
+              
+              <!-- 互动按钮 -->
+              <view class="comment-actions">
+                <view class="action-item" bindtap="toggleLike" data-id="{{item._id}}" data-liked="{{item.isLiked}}">
+                  <text class="action-icon">{{item.isLiked ? '❤️' : '🤍'}}</text>
+                  <text class="action-text">{{item.likeCount || 0}}</text>
+                </view>
+                <view class="action-item" bindtap="showReplyInput" data-id="{{item._id}}">
+                  <text class="action-icon">💬</text>
+                  <text class="action-text">回复</text>
+                </view>
+              </view>
+            </view>
+        </view>
+      </view>
+    </block>
+    <empty-state wx:else message="还没有留言，点击右上角写下第一条吧~" />
+  </view>
+
+  <!-- 回复输入框 -->
+  <view class="reply-input-modal" wx:if="{{showReplyModal}}" bindtap="hideReplyInput">
+    <view class="reply-input-box" catchtap="stopPropagation">
+      <view class="reply-header">
+        <text class="reply-title">回复 {{replyTargetName}}</text>
+        <text class="reply-close" bindtap="hideReplyInput">×</text>
+      </view>
+      <view class="reply-input-wrapper">
+        <textarea 
+          class="reply-input" 
+          placeholder="写回复..." 
+          value="{{replyContent}}"
+          bindinput="onReplyInput"
+          show-confirm-bar="{{false}}"
+          maxlength="200"
+        ></textarea>
+      </view>
+      <view class="reply-actions">
+        <text class="reply-cancel" bindtap="hideReplyInput">取消</text>
+        <text class="reply-submit" bindtap="submitReply">发送</text>
+      </view>
+    </view>
+  </view>
+</view>

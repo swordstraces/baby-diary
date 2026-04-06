@@ -1,0 +1,178 @@
+<view class="health-form">
+  <!-- 子类型选择 -->
+  <view class="form-item">
+    <view class="form-label">记录类型</view>
+    <view class="subtype-grid">
+      <view class="subtype-btn {{subType === item.value ? 'subtype-btn-active' : ''}}"
+            wx:for="{{subTypes}}" wx:key="value"
+            bindtap="selectSubType" data-val="{{item.value}}">
+        <text class="subtype-icon">{{item.emoji}}</text>
+        <text class="subtype-text">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 体温表单 -->
+  <block wx:if="{{subType === 'temperature'}}">
+    <view class="form-item">
+      <view class="form-label">体温（℃）</view>
+      <view class="temp-input-area">
+        <view class="temp-control" bindtap="adjustTemp" data-delta="-0.1">
+          <text class="temp-btn-text">−</text>
+        </view>
+        <view class="temp-display">
+          <text class="temp-value">{{temperature || '36.5'}}</text>
+          <text class="temp-unit">℃</text>
+        </view>
+        <view class="temp-control" bindtap="adjustTemp" data-delta="0.1">
+          <text class="temp-btn-text">+</text>
+        </view>
+      </view>
+      <view class="temp-quick">
+        <view class="quick-temp" wx:for="{{quickTemps}}" wx:key="*this"
+              bindtap="setTemp" data-val="{{item}}">
+          {{item}}℃
+        </view>
+      </view>
+      <view class="temp-status {{tempStatus === 'normal' ? 'status-normal' : tempStatus === 'low' ? 'status-low' : 'status-high'}}" wx:if="{{tempStatus}}">
+        <text class="status-icon">{{tempStatus === 'normal' ? '✅' : tempStatus === 'low' ? '❄️' : '🔥'}}</text>
+        <text class="status-text">{{tempStatusText}}</text>
+      </view>
+    </view>
+    <view class="form-item">
+      <view class="form-label">测量部位</view>
+      <view class="measure-grid">
+        <view class="measure-btn {{measurePos === item.value ? 'measure-btn-active' : ''}}"
+              wx:for="{{measurePositions}}" wx:key="value"
+              bindtap="selectMeasurePos" data-val="{{item.value}}">
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 用药表单 -->
+  <block wx:if="{{subType === 'medicine'}}">
+    <view class="form-item">
+      <view class="form-label">药物名称</view>
+      <input class="text-input" value="{{medicineName}}" bindinput="onMedicineNameInput"
+             placeholder="请输入药物名称" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">剂量</view>
+      <view class="dose-row">
+        <input class="dose-input" type="digit" value="{{medicineDose}}"
+               bindinput="onMedicineDoseInput" placeholder="剂量数值" />
+        <view class="dose-unit-btns">
+          <view class="unit-btn {{doseUnit === 'ml' ? 'unit-btn-active' : ''}}" bindtap="setDoseUnit" data-val="ml">ml</view>
+          <view class="unit-btn {{doseUnit === 'mg' ? 'unit-btn-active' : ''}}" bindtap="setDoseUnit" data-val="mg">mg</view>
+          <view class="unit-btn {{doseUnit === '滴' ? 'unit-btn-active' : ''}}" bindtap="setDoseUnit" data-val="滴">滴</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 疫苗表单 -->
+  <block wx:if="{{subType === 'vaccine'}}">
+    <view class="form-item">
+      <view class="form-label">疫苗名称</view>
+      <input class="text-input" value="{{vaccineName}}" bindinput="onVaccineNameInput"
+             placeholder="请输入疫苗名称" />
+    </view>
+    <view class="form-item">
+      <view class="form-label">接种部位</view>
+      <view class="measure-grid">
+        <view class="measure-btn {{injectPos === item.value ? 'measure-btn-active' : ''}}"
+              wx:for="{{injectPositions}}" wx:key="value"
+              bindtap="selectInjectPos" data-val="{{item.value}}">
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+    <view class="form-item">
+      <view class="form-label">不良反应（可选）</view>
+      <view class="reaction-grid">
+        <view class="reaction-btn {{item._selected ? 'reaction-btn-active' : ''}}"
+              wx:for="{{reactions}}" wx:key="value"
+              bindtap="toggleReaction" data-val="{{item.value}}">
+          {{item.label}}
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 体重表单 -->
+  <block wx:if="{{subType === 'weight'}}">
+    <view class="form-item">
+      <view class="form-label">体重（kg）</view>
+      <view class="temp-input-area">
+        <view class="temp-control" bindtap="adjustWeight" data-delta="-0.1">
+          <text class="temp-btn-text">−</text>
+        </view>
+        <view class="temp-display">
+          <text class="temp-value">{{weight || '3.0'}}</text>
+          <text class="temp-unit">kg</text>
+        </view>
+        <view class="temp-control" bindtap="adjustWeight" data-delta="0.1">
+          <text class="temp-btn-text">+</text>
+        </view>
+      </view>
+      <view class="temp-quick">
+        <view class="quick-temp" wx:for="{{quickWeights}}" wx:key="*this"
+              bindtap="setWeight" data-val="{{item}}">
+          {{item}}kg
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 身高表单 -->
+  <block wx:if="{{subType === 'height'}}">
+    <view class="form-item">
+      <view class="form-label">身高（cm）</view>
+      <view class="temp-input-area">
+        <view class="temp-control" bindtap="adjustHeight" data-delta="-1">
+          <text class="temp-btn-text">−</text>
+        </view>
+        <view class="temp-display">
+          <text class="temp-value">{{height || '50'}}</text>
+          <text class="temp-unit">cm</text>
+        </view>
+        <view class="temp-control" bindtap="adjustHeight" data-delta="1">
+          <text class="temp-btn-text">+</text>
+        </view>
+      </view>
+      <view class="temp-quick">
+        <view class="quick-temp" wx:for="{{quickHeights}}" wx:key="*this"
+              bindtap="setHeight" data-val="{{item}}">
+          {{item}}cm
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 头围表单 -->
+  <block wx:if="{{subType === 'headCircumference'}}">
+    <view class="form-item">
+      <view class="form-label">头围（cm）</view>
+      <view class="temp-input-area">
+        <view class="temp-control" bindtap="adjustHead" data-delta="-0.1">
+          <text class="temp-btn-text">−</text>
+        </view>
+        <view class="temp-display">
+          <text class="temp-value">{{headCircumference || '35.0'}}</text>
+          <text class="temp-unit">cm</text>
+        </view>
+        <view class="temp-control" bindtap="adjustHead" data-delta="0.1">
+          <text class="temp-btn-text">+</text>
+        </view>
+      </view>
+      <view class="temp-quick">
+        <view class="quick-temp" wx:for="{{quickHeads}}" wx:key="*this"
+              bindtap="setHead" data-val="{{item}}">
+          {{item}}cm
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

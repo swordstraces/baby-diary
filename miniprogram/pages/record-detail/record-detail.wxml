@@ -1,0 +1,76 @@
+<view class="detail-page">
+  <!-- 记录类型头部 -->
+  <view class="detail-header" style="--accent: {{typeConfig.color}}; --accent-bg: {{typeConfig.bgColor}}">
+    <view class="header-icon-wrap">
+      <text class="header-icon">{{typeConfig.icon}}</text>
+    </view>
+    <view class="header-info">
+      <text class="header-type">{{typeConfig.label}}</text>
+      <text class="header-time">{{displayTime}}</text>
+    </view>
+    <text class="header-operator">👤 {{record.operatorName || '未知'}}</text>
+  </view>
+
+  <!-- 记录数据 -->
+  <view class="detail-data">
+    <view class="data-item" wx:for="{{dataList}}" wx:key="label">
+      <text class="data-label">{{item.label}}</text>
+      <text class="data-value">{{item.value}}</text>
+    </view>
+  </view>
+
+  <!-- 观察笔记 -->
+  <view class="detail-note" wx:if="{{record.note}}">
+    <view class="note-title">📝 观察笔记</view>
+    <text class="note-content">{{record.note}}</text>
+  </view>
+
+  <!-- 评论区 -->
+  <view class="comment-section">
+    <view class="comment-title">💬 评论 ({{comments.length}})</view>
+    <view class="comment-list" wx:if="{{comments.length > 0}}">
+      <view class="comment-item" wx:for="{{comments}}" wx:key="_id">
+        <view class="comment-avatar">
+          <image wx:if="{{item.displayAvatar}}" src="{{item.displayAvatar}}" mode="aspectFill" />
+          <text wx:else>{{item.displayName ? item.displayName[0] : '匿'}}</text>
+        </view>
+        <view class="comment-body">
+          <view class="comment-header">
+            <text class="comment-name">{{item.displayName || '匿名'}}</text>
+            <!-- 删除按钮：仅管理员可见 -->
+            <text class="comment-delete" wx:if="{{isAdmin}}" bindtap="deleteComment" data-id="{{item._id}}">🗑️</text>
+          </view>
+          <text class="comment-text">{{item.content}}</text>
+          <text class="comment-time">{{item.displayTime}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="comment-empty" wx:else>
+      <text class="empty-text">暂无评论</text>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar safe-area-bottom">
+    <!-- 删除按钮 -->
+    <view class="action-btn delete-btn" bindtap="deleteRecord">
+      <text class="btn-icon">🗑️</text>
+      <text class="btn-text">删除</text>
+    </view>
+    <!-- 编辑按钮 -->
+    <view class="action-btn edit-btn" bindtap="editRecord">
+      <text class="btn-icon">✏️</text>
+      <text class="btn-text">编辑</text>
+    </view>
+  </view>
+
+  <!-- 底部评论输入 -->
+  <view class="comment-bar safe-area-bottom">
+    <input class="comment-input" value="{{commentText}}" bindinput="onCommentInput"
+           bindconfirm="submitComment" placeholder="写下你的评论..."
+           confirm-type="send" />
+    <view class="comment-send {{commentText ? 'send-active' : ''}}" bindtap="submitComment">
+      发送
+    </view>
+  </view>
+</view>

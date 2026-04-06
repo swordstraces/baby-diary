@@ -1,0 +1,71 @@
+<view class="food-form">
+  <!-- 食物种类 -->
+  <view class="form-item">
+    <view class="form-label">食物种类</view>
+    <view class="food-input-area">
+      <view class="food-tags">
+        <view class="food-tag {{item._selected ? 'food-tag-active' : ''}}"
+              wx:for="{{commonFoods}}" wx:key="label"
+              bindtap="toggleFood" data-label="{{item.label}}">
+          {{item.label}}
+        </view>
+      </view>
+      <!-- 自定义食物标签（可删除） -->
+      <view class="food-tags" wx:if="{{customFoodList.length > 0}}">
+        <view class="food-tag food-tag-custom food-tag-active"
+              wx:for="{{customFoodList}}" wx:key="*this">
+          {{item}}
+          <text class="custom-remove" bindtap="removeCustomFood" data-food="{{item}}">×</text>
+        </view>
+      </view>
+      <view class="custom-food-row">
+        <input class="custom-food-input" value="{{customFood}}" bindinput="onCustomFoodInput"
+               bindconfirm="addCustomFood" placeholder="自定义食物，回车添加" confirm-type="done" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 食量 -->
+  <view class="form-item">
+    <view class="form-label">食量</view>
+    <view class="amount-wrap">
+      <view class="amount-btns">
+        <view class="amount-btn {{amount === 'little' ? 'amount-btn-active' : ''}}"
+              bindtap="setAmount" data-val="little">少</view>
+        <view class="amount-btn {{amount === 'normal' ? 'amount-btn-active' : ''}}"
+              bindtap="setAmount" data-val="normal">中</view>
+        <view class="amount-btn {{amount === 'much' ? 'amount-btn-active' : ''}}"
+              bindtap="setAmount" data-val="much">多</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 接受程度 -->
+  <view class="form-item">
+    <view class="form-label">接受程度</view>
+    <view class="accept-grid">
+      <view class="accept-btn {{acceptance === item.value ? 'accept-btn-active' : ''}}"
+            wx:for="{{acceptanceLevels}}" wx:key="value"
+            bindtap="selectAcceptance" data-val="{{item.value}}">
+        <text class="accept-emoji">{{item.emoji}}</text>
+        <text class="accept-text">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 新食物标记 -->
+  <view class="form-item">
+    <view class="new-food-toggle" bindtap="toggleNewFood">
+      <view class="toggle-left">
+        <text class="toggle-icon">{{isNewFood ? '🆕' : '➕'}}</text>
+        <text class="toggle-label">新食物尝试</text>
+      </view>
+      <view class="toggle-switch {{isNewFood ? 'toggle-switch-on' : ''}}">
+        <view class="toggle-dot"></view>
+      </view>
+    </view>
+    <view class="new-food-tip" wx:if="{{isNewFood}}">
+      <text class="tip-text">已标记为新食物，建议连续观察3天是否有过敏反应</text>
+    </view>
+  </view>
+</view>

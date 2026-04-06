@@ -1,0 +1,9 @@
+{
+  "name": "checkAlerts",
+  "version": "1.0.0",
+  "description": "定时异常检查",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

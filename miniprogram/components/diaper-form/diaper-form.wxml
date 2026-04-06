@@ -1,0 +1,35 @@
+<view class="diaper-form">
+  <!-- 尿布类型 -->
+  <view class="form-item">
+    <view class="form-label">类型</view>
+    <view class="type-grid">
+      <view class="type-btn {{diaperType === 'wet' ? 'type-btn-active' : ''}}" bindtap="selectType" data-type="wet">
+        <text class="type-icon">💧</text>
+        <text class="type-text">嘘嘘</text>
+      </view>
+      <view class="type-btn {{diaperType === 'stool' ? 'type-btn-active' : ''}}" bindtap="selectType" data-type="stool">
+        <text class="type-icon">💩</text>
+        <text class="type-text">便便</text>
+      </view>
+      <view class="type-btn {{diaperType === 'both' ? 'type-btn-active' : ''}}" bindtap="selectType" data-type="both">
+        <text class="type-icon">💦</text>
+        <text class="type-text">都有</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 便便颜色（仅便便或两者时显示） -->
+  <view class="form-item" wx:if="{{diaperType === 'stool' || diaperType === 'both'}}">
+    <view class="form-label">便便颜色</view>
+    <view class="color-grid">
+      <view 
+        class="color-btn {{stoolColor === item.value ? 'color-btn-active' : ''}}" 
+        wx:for="{{stoolColors}}" 
+        wx:key="value"
+        bindtap="selectColor" 
+        data-value="{{item.value}}">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "邀请成员",
+  "usingComponents": {
+    "identity-picker": "../../components/identity-picker/identity-picker"
+  }
+}

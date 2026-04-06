@@ -1,0 +1,68 @@
+<view class="feeding-form">
+  <!-- 喂养方式选择 -->
+  <view class="form-item">
+    <view class="form-label">喂养方式</view>
+    <view class="method-grid">
+      <view 
+        class="method-btn {{method === 'breast_left' ? 'method-btn-active' : ''}}" 
+        bindtap="selectMethod" data-method="breast_left">
+        <text class="method-icon">🤱</text>
+        <text class="method-text">左侧</text>
+      </view>
+      <view 
+        class="method-btn {{method === 'breast_right' ? 'method-btn-active' : ''}}" 
+        bindtap="selectMethod" data-method="breast_right">
+        <text class="method-icon">🤱</text>
+        <text class="method-text">右侧</text>
+      </view>
+      <view 
+        class="method-btn {{method === 'breast_both' ? 'method-btn-active' : ''}}" 
+        bindtap="selectMethod" data-method="breast_both">
+        <text class="method-icon">🤱</text>
+        <text class="method-text">双侧</text>
+      </view>
+      <view 
+        class="method-btn {{method === 'bottle' ? 'method-btn-active' : ''}}" 
+        bindtap="selectMethod" data-method="bottle">
+        <text class="method-icon">🍼</text>
+        <text class="method-text">奶瓶</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 奶瓶喂奶：奶量输入 -->
+  <view class="form-item" wx:if="{{method === 'bottle'}}">
+    <view class="form-label">奶量 (ml)</view>
+    <view class="volume-input-wrap">
+      <view class="volume-btn" bindtap="adjustVolume" data-delta="-10">-10</view>
+      <input class="volume-input" type="digit" value="{{volume}}" bindinput="onVolumeInput" placeholder="0" />
+      <view class="volume-unit">ml</view>
+      <view class="volume-btn" bindtap="adjustVolume" data-delta="10">+10</view>
+    </view>
+    <view class="quick-volumes">
+      <view class="quick-btn" bindtap="setVolume" data-val="30">30ml</view>
+      <view class="quick-btn" bindtap="setVolume" data-val="60">60ml</view>
+      <view class="quick-btn" bindtap="setVolume" data-val="90">90ml</view>
+      <view class="quick-btn" bindtap="setVolume" data-val="120">120ml</view>
+      <view class="quick-btn" bindtap="setVolume" data-val="150">150ml</view>
+    </view>
+  </view>
+
+  <!-- 母乳喂奶：时长 -->
+  <view class="form-item" wx:if="{{method !== 'bottle' && method !== ''}}">
+    <view class="form-label">喂养时长 (分钟)</view>
+    <view class="volume-input-wrap">
+      <view class="volume-btn" bindtap="adjustDuration" data-delta="-5">-5</view>
+      <input class="volume-input" type="number" value="{{duration}}" bindinput="onDurationInput" placeholder="0" />
+      <view class="volume-unit">分钟</view>
+      <view class="volume-btn" bindtap="adjustDuration" data-delta="5">+5</view>
+    </view>
+    <view class="quick-volumes">
+      <view class="quick-btn" bindtap="setDuration" data-val="5">5分钟</view>
+      <view class="quick-btn" bindtap="setDuration" data-val="10">10分钟</view>
+      <view class="quick-btn" bindtap="setDuration" data-val="15">15分钟</view>
+      <view class="quick-btn" bindtap="setDuration" data-val="20">20分钟</view>
+      <view class="quick-btn" bindtap="setDuration" data-val="30">30分钟</view>
+    </view>
+  </view>
+</view>

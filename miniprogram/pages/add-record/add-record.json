@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "记录",
+  "usingComponents": {
+    "feeding-form": "../../components/feeding-form/feeding-form",
+    "diaper-form": "../../components/diaper-form/diaper-form",
+    "sleep-form": "../../components/sleep-form/sleep-form",
+    "mood-form": "../../components/mood-form/mood-form",
+    "food-form": "../../components/food-form/food-form",
+    "health-form": "../../components/health-form/health-form"
+  }
+}

@@ -1,0 +1,85 @@
+<!-- pages/privacy/privacy.wxml -->
+<view class="privacy-page">
+  <view class="header">
+    <text class="title">隐私政策</text>
+    <text class="date">更新日期：{{updateDate}}</text>
+  </view>
+
+  <view class="content">
+    <view class="section">
+      <text class="section-title">引言</text>
+      <text class="text">欢迎使用宝贝日记（以下简称"本应用"）。我们深知个人信息对您的重要性，并会尽全力保护您的个人信息安全可靠。我们致力于维持您对我们的信任，恪守以下原则，保护您的个人信息：权责一致原则、目的明确原则、选择同意原则、最少够用原则、确保安全原则、主体参与原则、公开透明原则等。</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">一、我们如何收集和使用您的个人信息</text>
+      <view class="subsection">
+        <text class="subsection-title">1.1 账户注册与登录</text>
+        <text class="text">当您注册和登录本应用时，我们会收集您的微信授权信息（包括昵称、头像、openid），用于创建您的账户并识别您的身份。</text>
+      </view>
+      <view class="subsection">
+        <text class="subsection-title">1.2 核心功能使用</text>
+        <text class="text">为了提供记录宝宝成长日记的功能，我们会收集和存储以下信息：</text>
+        <text class="text">• 家庭成员信息：包括您选择的身份（爸爸、妈妈等）、昵称、头像</text>
+        <text class="text">• 宝宝信息：包括宝宝姓名、生日、头像</text>
+        <text class="text">• 成长记录：包括喂养、睡眠、换尿布、健康、里程碑等各类记录的时间、数量、备注等信息</text>
+        <text class="text">• 评论互动：家庭成员之间对记录的评论内容</text>
+      </view>
+      <view class="subsection">
+        <text class="subsection-title">1.3 数据存储</text>
+        <text class="text">您的所有数据将存储在微信云开发提供的云数据库中，仅您和您授权的家庭成员可以访问。</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">二、信息的共享、转让、公开披露</text>
+      <text class="text">我们承诺不会向任何无关第三方共享、转让或公开披露您的个人信息，除非：</text>
+      <text class="text">• 获得您的明确同意</text>
+      <text class="text">• 根据法律法规、行政或司法机关要求必须提供</text>
+      <text class="text">• 为维护我们的合法权益，需要向第三方披露您的个人信息</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">三、信息的存储</text>
+      <view class="subsection">
+        <text class="subsection-title">3.1 存储期限</text>
+        <text class="text">我们仅在为您提供服务期间保留您的个人信息。当您注销账户后，我们将在合理时间内删除或匿名化处理您的个人信息。</text>
+      </view>
+      <view class="subsection">
+        <text class="subsection-title">3.2 存储地点</text>
+        <text class="text">您的个人信息存储在中华人民共和国境内的服务器上。</text>
+      </view>
+      <view class="subsection">
+        <text class="subsection-title">3.3 数据安全</text>
+        <text class="text">我们已采取符合业界标准的安全防护措施保护您的个人信息，防止信息遭到未经授权访问、公开披露、使用、修改、损坏或丢失。</text>
+      </view>
+    </view>
+
+    <view class="section">
+      <text class="section-title">四、您的权利</text>
+      <text class="text">您拥有以下权利：</text>
+      <text class="text">• 访问您的个人信息</text>
+      <text class="text">• 更正您的个人信息</text>
+      <text class="text">• 删除您的个人信息（包括注销账户）</text>
+      <text class="text">• 改变您授权同意的范围</text>
+      <text class="text">• 注销账户后，您的所有数据将被删除且无法恢复</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">五、未成年人保护</text>
+      <text class="text">本应用主要服务于记录未成年人的成长信息。我们非常重视对未成年人个人信息的保护。如果您是未成年人，建议您请您的监护人仔细阅读本隐私政策，并在征得您的监护人同意后，使用我们的服务。</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">六、本政策的更新</text>
+      <text class="text">我们可能适时修订本隐私政策的条款，该等修订构成本隐私政策的一部分。如该等修订造成您在本隐私政策下权利的实质减少，我们将在修订生效前通过在主页上显著位置提示的方式通知您。</text>
+    </view>
+
+    <view class="section">
+      <text class="section-title">七、如何联系我们</text>
+      <text class="text">如果您对本隐私政策有任何疑问、意见或建议，或需要行使您的权利，请通过以下方式与我们联系：</text>
+      <text class="email" bindtap="copyEmail">邮箱：support@babytracker.com（点击复制）</text>
+      <text class="text">我们将在15个工作日内回复您的请求。</text>
+    </view>
+  </view>
+</view>

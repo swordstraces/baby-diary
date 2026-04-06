@@ -1,0 +1,13 @@
+<view class="quick-actions">
+  <view class="actions-title">快捷记录</view>
+  <view class="actions-grid">
+    <view class="action-item" wx:for="{{actions}}" wx:key="type"
+          bindtap="onTap" data-type="{{item.type}}"
+          style="--item-color: {{item.color}}; --item-bg: {{item.bgColor}}">
+      <view class="action-icon-wrap">
+        <text class="action-icon">{{item.icon}}</text>
+      </view>
+      <text class="action-text">{{item.label}}</text>
+    </view>
+  </view>
+</view>

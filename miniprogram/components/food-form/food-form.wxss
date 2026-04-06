@@ -1,0 +1,83 @@
+.food-form { padding: 0; }
+
+/* 食物种类 */
+.food-input-area { width: 100%; }
+.food-tags { display: flex; flex-wrap: wrap; gap: 12rpx; margin-bottom: 16rpx; }
+.food-tag {
+  padding: 14rpx 28rpx; border-radius: var(--border-radius-xl);
+  background: var(--bg-primary); font-size: var(--font-size-sm); color: var(--text-secondary);
+  border: 2rpx solid transparent; transition: all var(--transition-fast);
+}
+.food-tag-active {
+  background: var(--type-food-bg); color: #6BA89A; font-weight: 500;
+  border-color: #95E1D3; box-shadow: 0 4rpx 12rpx rgba(149, 225, 211, 0.25);
+}
+.food-tag-custom {
+  display: flex; align-items: center; gap: 4rpx;
+  padding-right: 16rpx;
+}
+.custom-remove {
+  font-size: var(--font-size-sm); color: rgba(107, 168, 154, 0.7);
+  margin-left: 4rpx; line-height: 1;
+}
+.custom-food-row { width: 100%; }
+.custom-food-input {
+  width: 100%; height: 72rpx; background: var(--bg-primary);
+  border-radius: var(--border-radius-md); padding: 0 24rpx;
+  font-size: var(--font-size-sm); box-sizing: border-box;
+}
+
+/* 食量 */
+.amount-wrap { width: 100%; }
+.amount-btns { display: flex; gap: 16rpx; }
+.amount-btn {
+  flex: 1; height: 88rpx; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--border-radius-lg); background: var(--bg-primary);
+  font-size: var(--font-size-md); color: var(--text-secondary);
+  border: 2rpx solid transparent; transition: all var(--transition-fast);
+}
+.amount-btn-active {
+  background: var(--type-food-bg); color: #6BA89A; font-weight: 500;
+  border-color: #95E1D3; box-shadow: 0 4rpx 16rpx rgba(149, 225, 211, 0.2);
+}
+
+/* 接受程度 */
+.accept-grid { display: flex; gap: 10rpx; }
+.accept-btn {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24rpx 8rpx; border-radius: var(--border-radius-lg);
+  background: var(--bg-primary); border: 2rpx solid transparent;
+  transition: all var(--transition-fast);
+}
+.accept-btn-active {
+  background: var(--type-food-bg); border-color: #95E1D3;
+  box-shadow: 0 4rpx 16rpx rgba(149, 225, 211, 0.2);
+}
+.accept-emoji { font-size: 44rpx; margin-bottom: 6rpx; }
+.accept-text { font-size: var(--font-size-sm); color: var(--text-secondary); }
+.accept-btn-active .accept-text { color: #6BA89A; font-weight: 500; }
+
+/* 新食物标记 */
+.new-food-toggle {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24rpx; background: var(--bg-primary); border-radius: var(--border-radius-lg);
+}
+.toggle-left { display: flex; align-items: center; gap: 12rpx; }
+.toggle-icon { font-size: 36rpx; }
+.toggle-label { font-size: var(--font-size-sm); color: var(--text-primary); }
+.toggle-switch {
+  width: 80rpx; height: 44rpx; border-radius: 22rpx;
+  background: #ddd; position: relative; transition: background var(--transition-fast);
+}
+.toggle-switch-on { background: #95E1D3; }
+.toggle-dot {
+  width: 36rpx; height: 36rpx; border-radius: 50%; background: #fff;
+  position: absolute; top: 4rpx; left: 4rpx; transition: transform var(--transition-fast);
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.15);
+}
+.toggle-switch-on .toggle-dot { transform: translateX(36rpx); }
+.new-food-tip {
+  margin-top: 12rpx; padding: 16rpx 20rpx; border-radius: var(--border-radius-md);
+  background: rgba(149, 225, 211, 0.12);
+}
+.tip-text { font-size: var(--font-size-xs); color: #6BA89A; line-height: 1.5; }

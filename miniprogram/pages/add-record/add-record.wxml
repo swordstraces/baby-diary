@@ -1,0 +1,83 @@
+<view class="add-record">
+  <!-- 顶部记录类型选择 -->
+  <view class="type-bar">
+    <scroll-view scroll-x class="type-scroll" enhanced show-scrollbar="{{false}}">
+      <view class="type-tabs">
+        <view class="type-tab {{recordType === item.type ? 'type-tab-active' : ''}}"
+              wx:for="{{typeList}}" wx:key="type"
+              bindtap="switchType" data-type="{{item.type}}"
+              style="--accent: {{item.color}}">
+          <text class="type-icon">{{item.icon}}</text>
+          <text class="type-label">{{item.label}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 时间选择 -->
+  <view class="time-section">
+    <view class="time-label">
+      <text class="time-icon">🕐</text>
+      <text>记录时间</text>
+    </view>
+    <picker mode="time" value="{{recordTime}}" bindchange="onTimeChange">
+      <view class="time-display">
+        <text class="time-text">{{recordTime}}</text>
+        <text class="time-edit">修改</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 动态表单区域 -->
+  <view class="form-section">
+    <view class="form-title">
+      <text class="form-title-icon">{{currentConfig.icon}}</text>
+      <text>{{currentConfig.label}}记录</text>
+    </view>
+
+    <feeding-form wx:if="{{recordType === 'feeding'}}" id="form"
+                  defaultData="{{editData}}"
+                  bind:change="onFormChange" />
+    <diaper-form wx:if="{{recordType === 'diaper'}}" id="form"
+                 defaultData="{{editData}}"
+                 bind:change="onFormChange" />
+    <sleep-form wx:if="{{recordType === 'sleep'}}" id="form"
+                defaultData="{{editData}}"
+                bind:change="onFormChange" />
+    <mood-form wx:if="{{recordType === 'mood'}}" id="form"
+               defaultData="{{editData}}"
+               bind:change="onFormChange" />
+    <food-form wx:if="{{recordType === 'food'}}" id="form"
+               defaultData="{{editData}}"
+               bind:change="onFormChange" />
+    <health-form wx:if="{{recordType === 'health'}}" id="form"
+                 defaultData="{{editData}}"
+                 bind:change="onFormChange" />
+  </view>
+
+  <!-- 备注区域 -->
+  <view class="note-section">
+    <view class="note-toggle" bindtap="toggleNote">
+      <text class="note-icon">📝</text>
+      <text class="note-label">观察笔记</text>
+      <text class="note-arrow">{{showNote ? '收起' : '展开'}}</text>
+    </view>
+    <view class="note-area" wx:if="{{showNote}}">
+      <textarea class="note-input" value="{{note}}" bindinput="onNoteInput"
+                placeholder="记录宝宝的特殊表现或观察..."
+                maxlength="500" auto-height="{{false}}" />
+      <view class="note-count">{{note.length}}/500</view>
+    </view>
+  </view>
+
+  <!-- 底部提交栏 -->
+  <view class="submit-bar safe-area-bottom">
+    <view class="submit-hint" wx:if="{{submitHint}}">
+      <text>{{submitHint}}</text>
+    </view>
+    <button class="submit-btn" bindtap="submitRecord"
+            disabled="{{submitting}}" loading="{{submitting}}">
+      {{isEdit ? '保存修改' : '保存记录'}}
+    </button>
+  </view>
+</view>

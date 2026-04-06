@@ -1,0 +1,26 @@
+<view class="record-card" bindtap="onTap" bindlongpress="onLongPress" style="--card-color: {{config.color}}; --card-bg: {{config.bgColor}}">
+  <view class="card-left">
+    <view class="card-icon-wrap">
+      <text class="card-icon">{{config.icon}}</text>
+    </view>
+  </view>
+  <view class="card-content">
+    <view class="card-header">
+      <text class="card-type">{{config.label}}</text>
+      <text class="card-time">{{displayTime}}</text>
+    </view>
+    <view class="card-summary">{{summary}}</view>
+    <view class="card-footer" wx:if="{{record.operatorName || record.identity}}">
+      <view class="card-operator-info">
+        <view class="operator-avatar">
+          <image wx:if="{{cleanOperatorAvatar}}" class="avatar-img" src="{{cleanOperatorAvatar}}" mode="aspectFill" />
+          <text wx:else>{{avatarPlaceholder || '匿'}}</text>
+        </view>
+        <text class="card-operator">{{displayOperatorName || '匿名'}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="card-arrow">
+    <text class="arrow-icon">›</text>
+  </view>
+</view>

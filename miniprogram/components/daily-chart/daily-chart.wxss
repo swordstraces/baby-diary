@@ -1,0 +1,15 @@
+.daily-chart {
+  background: var(--bg-card); border-radius: var(--border-radius-lg);
+  padding: 32rpx; margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.03);
+}
+.chart-title {
+  font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary);
+  margin-bottom: 20rpx;
+}
+.chart-canvas { width: 100%; }
+.chart-labels {
+  display: flex; justify-content: space-around;
+  margin-top: 12rpx;
+}
+.chart-label { font-size: var(--font-size-sm); color: var(--text-hint); }

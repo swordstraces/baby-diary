@@ -1,0 +1,14 @@
+// array.wxs — WXML 模板中可用的数组工具函数
+// WXS 运行在渲染层，不支持 ES6 语法
+
+function includes(arr, val) {
+  if (!arr || !arr.length) return false
+  for (var i = 0; i < arr.length; i++) {
+    if (arr[i] === val) return true
+  }
+  return false
+}
+
+module.exports = {
+  includes: includes
+}

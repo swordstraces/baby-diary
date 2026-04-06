@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Family {
+  id         String   @id @default(cuid())
+  name       String
+  inviteCode String   @unique
+  createdAt  DateTime @default(now())
+  babies     Baby[]
+  members    Member[]
+  records    Record[]
+}
+
+model Baby {
+  id        String    @id @default(cuid())
+  familyId  String
+  family    Family    @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  name      String
+  birthDate DateTime?
+  createdAt DateTime  @default(now())
+  records   Record[]
+
+  @@index([familyId])
+}
+
+enum MemberRole {
+  ADMIN
+  MEMBER
+}
+
+model Member {
+  id           String     @id @default(cuid())
+  familyId     String
+  family       Family     @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  displayName  String
+  loginKey     String
+  role         MemberRole @default(MEMBER)
+  identityTag  String?
+  passwordHash String
+  createdAt    DateTime   @default(now())
+  records      Record[]   @relation("RecordAuthor")
+  comments     Comment[]
+
+  @@unique([familyId, loginKey])
+  @@index([familyId])
+}
+
+enum RecordType {
+  FEEDING
+  DIAPER
+  SLEEP
+  MOOD
+  FOOD
+  HEALTH
+}
+
+model Record {
+  id                String     @id @default(cuid())
+  familyId          String
+  family            Family     @relation(fields: [familyId], references: [id], onDelete: Cascade)
+  babyId            String
+  baby              Baby       @relation(fields: [babyId], references: [id], onDelete: Cascade)
+  type              RecordType
+  payload           Json       @default("{}")
+  note              String?
+  createdByMemberId String
+  createdBy         Member     @relation("RecordAuthor", fields: [createdByMemberId], references: [id])
+  createdAt         DateTime   @default(now())
+  comments          Comment[]
+
+  @@index([familyId, babyId, createdAt])
+  @@index([babyId, createdAt])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  recordId  String
+  record    Record   @relation(fields: [recordId], references: [id], onDelete: Cascade)
+  memberId  String
+  member    Member   @relation(fields: [memberId], references: [id])
+  text      String
+  createdAt DateTime @default(now())
+
+  @@index([recordId])
+}

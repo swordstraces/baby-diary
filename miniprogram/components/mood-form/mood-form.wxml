@@ -1,0 +1,33 @@
+<view class="mood-form">
+  <view class="form-item">
+    <view class="form-label">情绪状态</view>
+    <view class="mood-grid">
+      <view class="mood-btn {{moodType === item.value ? 'mood-btn-active' : ''}}" wx:for="{{moodTypes}}" wx:key="value" bindtap="selectMood" data-val="{{item.value}}">
+        <text class="mood-icon">{{item.emoji}}</text><text class="mood-text">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="form-item">
+    <view class="form-label">可能原因（可多选）</view>
+    <view class="reason-grid">
+      <view class="reason-btn {{item._selected ? 'reason-btn-active' : ''}}" wx:for="{{reasons}}" wx:key="value" bindtap="toggleReason" data-val="{{item.value}}">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+  <view class="form-item">
+    <view class="form-label">安抚方式</view>
+    <view class="reason-grid">
+      <view class="reason-btn {{sootheMethod === item.value ? 'reason-btn-active' : ''}}" wx:for="{{sootheMethods}}" wx:key="value" bindtap="selectSoothe" data-val="{{item.value}}">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+  <view class="form-item">
+    <view class="form-label">持续时长（分钟）</view>
+    <view class="duration-wrap">
+      <input class="duration-input" type="number" value="{{duration}}" bindinput="onDurationInput" placeholder="可选" />
+      <text class="duration-unit">分钟</text>
+    </view>
+  </view>
+</view>

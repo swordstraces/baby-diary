@@ -1,0 +1,84 @@
+<view class="invite-page">
+  <!-- 邀请/加入卡片 -->
+  <view class="invite-card" wx:if="{{!joinedFamilyName}}">
+    <!-- 模式切换标签 -->
+    <view class="mode-tabs">
+      <view class="tab-btn {{currentMode === 'generate' ? 'active' : ''}}" bindtap="switchMode" data-mode="generate">
+        生成邀请码
+      </view>
+      <view class="tab-btn {{currentMode === 'input' ? 'active' : ''}}" bindtap="switchMode" data-mode="input">
+        输入邀请码
+      </view>
+    </view>
+
+    <!-- 生成邀请码内容 -->
+    <view class="tab-content" wx:if="{{currentMode === 'generate'}}">
+      <view class="invite-icon">📨</view>
+      <text class="invite-title">邀请家人加入</text>
+      <text class="invite-desc">分享邀请码给家人，他们输入后即可加入你的家庭组</text>
+
+      <!-- 邀请码 -->
+      <view class="invite-code-section">
+        <text class="code-label">邀请码</text>
+        <view class="code-display">
+          <text class="code-text">{{inviteCode || '生成中...'}}</text>
+        </view>
+        <view class="code-actions">
+          <view class="code-btn copy-btn" bindtap="copyCode">复制邀请码</view>
+          <view class="code-btn share-btn" bindtap="shareInvite">分享给家人</view>
+        </view>
+      </view>
+
+      <!-- 提示 -->
+      <view class="invite-tips">
+        <text class="tip-item">💡 邀请码7天内有效</text>
+        <text class="tip-item">💡 新成员默认为普通成员角色</text>
+        <text class="tip-item">💡 你可以在家庭管理中修改成员角色</text>
+      </view>
+    </view>
+
+    <!-- 输入邀请码内容 -->
+    <view class="tab-content" wx:if="{{currentMode === 'input'}}">
+      <view class="invite-icon">🎉</view>
+      <text class="invite-title">加入家庭</text>
+      <text class="invite-desc">输入邀请码，即可加入家人的家庭组</text>
+
+      <!-- 输入框 -->
+      <view class="input-section">
+        <text class="code-label">邀请码</text>
+        <input class="code-input" 
+               type="text" 
+               placeholder="请输入6位邀请码"
+               maxlength="6"
+               value="{{inputCode}}"
+               bindinput="onCodeInput"
+               confirm-type="join"
+               bindconfirm="joinByCode" />
+        <view class="code-btn join-btn" bindtap="joinByCode">立即加入</view>
+      </view>
+
+      <!-- 提示 -->
+      <view class="invite-tips">
+        <text class="tip-item">💡 请向家人索取邀请码</text>
+        <text class="tip-item">💡 邀请码7天内有效</text>
+        <text class="tip-item">💡 加入后需要完善个人信息</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加入成功卡片（加入者视图） -->
+  <view class="invite-card joined-card" wx:if="{{joinedFamilyName}}">
+    <view class="success-icon">✅</view>
+    <text class="invite-title">加入成功！</text>
+    <text class="invite-desc">已成功加入「{{joinedFamilyName}}」家庭</text>
+    <view class="invite-tips">
+      <text class="tip-item">💡 请完善您的个人信息</text>
+      <text class="tip-item">💡 完善后即可开始记录宝宝日常</text>
+    </view>
+  </view>
+
+  <!-- 身份选择器 -->
+  <identity-picker show="{{showIdentityPicker}}"
+                   bind:confirm="onIdentityConfirm"
+                   bind:cancel="onIdentityCancel" />
+</view>

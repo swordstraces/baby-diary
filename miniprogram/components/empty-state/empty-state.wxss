@@ -1,0 +1,21 @@
+.empty-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 80rpx 40rpx;
+}
+.empty-illustration {
+  width: 200rpx; height: 200rpx; border-radius: 50%;
+  background: var(--bg-primary);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24rpx;
+}
+.empty-emoji { font-size: 80rpx; }
+.empty-message {
+  font-size: var(--font-size-sm); color: var(--text-hint);
+  text-align: center; line-height: 1.6;
+}
+.empty-action {
+  margin-top: 24rpx; padding: 16rpx 40rpx;
+  background: linear-gradient(135deg, #FF8C6B, #FF6B4A);
+  border-radius: var(--border-radius-xl);
+}
+.empty-action .action-text { font-size: var(--font-size-sm); color: #fff; font-weight: 500; }

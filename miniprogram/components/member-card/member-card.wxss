@@ -1,0 +1,60 @@
+.member-card {
+  display: flex; align-items: center; gap: 24rpx;
+  padding: 32rpx; background: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 16rpx;
+  position: relative;
+}
+
+/* 头像 */
+.member-avatar {
+  width: 96rpx; height: 96rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FF8C6B, #FFB088);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.avatar-img {
+  width: 100%; height: 100%; border-radius: 50%;
+}
+.avatar-emoji { font-size: 48rpx; }
+
+/* 中间信息区 */
+.member-detail { flex: 1; display: flex; flex-direction: column; gap: 10rpx; min-width: 0; }
+.member-top { display: flex; align-items: center; gap: 12rpx; flex-wrap: wrap; }
+.member-bottom { display: flex; align-items: center; gap: 12rpx; flex-wrap: wrap; padding: 6rpx 0; }
+.member-name { font-size: var(--font-size-lg); color: var(--text-primary); font-weight: 500; }
+
+/* 身份标签 */
+.member-identity {
+  font-size: var(--font-size-sm); padding: 6rpx 16rpx; border-radius: var(--border-radius-xl);
+  background: rgba(191, 160, 0, 0.1); color: #BFA000;
+  white-space: nowrap;
+}
+.member-identity-empty {
+  font-size: var(--font-size-sm); padding: 6rpx 16rpx; border-radius: var(--border-radius-xl);
+  background: rgba(153, 153, 153, 0.08); color: #999;
+  white-space: nowrap;
+}
+
+/* 角色标签 */
+.member-role {
+  font-size: var(--font-size-sm); padding: 6rpx 16rpx; border-radius: var(--border-radius-xl);
+  white-space: nowrap;
+}
+.role-admin { background: rgba(255, 140, 107, 0.12); color: #FF8C6B; }
+.role-member { background: rgba(78, 205, 196, 0.12); color: #4ECDC4; }
+
+/* 右侧操作按钮 */
+.member-action { display: flex; gap: 12rpx; flex-shrink: 0; }
+.edit-btn {
+  padding: 12rpx 24rpx; border-radius: var(--border-radius-xl);
+  font-size: var(--font-size-sm); background: rgba(78, 205, 196, 0.12);
+  color: #4ECDC4; white-space: nowrap;
+}
+.remove-btn {
+  padding: 12rpx 24rpx; border-radius: var(--border-radius-xl);
+  font-size: var(--font-size-sm); background: rgba(255, 107, 107, 0.12);
+  color: #FF6B6B; white-space: nowrap;
+}

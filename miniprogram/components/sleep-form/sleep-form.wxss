@@ -1,0 +1,20 @@
+.sleep-form { padding: 0; }
+.mode-grid, .quality-grid { display: flex; gap: 16rpx; }
+.mode-btn, .quality-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: 24rpx 16rpx; border-radius: var(--border-radius-lg);
+  background: var(--bg-primary); border: 2rpx solid transparent;
+  font-size: var(--font-size-sm); color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+.mode-btn-active, .quality-btn-active {
+  background: var(--type-sleep-bg); border-color: var(--type-sleep);
+  color: var(--type-sleep); font-weight: 500;
+  box-shadow: 0 4rpx 16rpx rgba(124, 131, 253, 0.2);
+}
+.mode-icon { font-size: 40rpx; margin-right: 8rpx; }
+.time-picker {
+  background: var(--bg-primary); border-radius: var(--border-radius-md);
+  padding: var(--spacing-md) var(--spacing-lg); font-size: var(--font-size-lg);
+  color: var(--text-primary); text-align: center;
+}

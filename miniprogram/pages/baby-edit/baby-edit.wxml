@@ -1,0 +1,56 @@
+<view class="baby-edit-page">
+  <!-- 头像 -->
+  <view class="avatar-section" bindtap="chooseAvatar">
+    <view class="avatar-wrap">
+      <image wx:if="{{avatarUrl}}" class="avatar-img" src="{{avatarUrl}}" mode="aspectFill"></image>
+      <text wx:else class="avatar-emoji">{{genderEmoji}}</text>
+      <view class="avatar-camera-icon">
+        <text>📷</text>
+      </view>
+    </view>
+    <text class="avatar-hint">{{avatarUrl ? '点击更换头像' : '点击设置头像'}}</text>
+  </view>
+
+  <!-- 表单 -->
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">宝宝姓名</text>
+      <input class="form-input" value="{{name}}" bindinput="onNameInput"
+             placeholder="请输入宝宝姓名" />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">性别</text>
+      <view class="gender-btns">
+        <view class="gender-btn {{gender === 'male' ? 'gender-btn-active' : ''}}"
+              bindtap="setGender" data-val="male">
+          <text class="gender-emoji">👦</text>
+          <text>男孩</text>
+        </view>
+        <view class="gender-btn {{gender === 'female' ? 'gender-btn-active' : ''}}"
+              bindtap="setGender" data-val="female">
+          <text class="gender-emoji">👧</text>
+          <text>女孩</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">出生日期</text>
+      <picker mode="date" value="{{birthday}}" bindchange="onBirthdayChange"
+              end="{{today}}" start="2020-01-01">
+        <view class="date-display">
+          <text class="date-value">{{birthday || '请选择'}}</text>
+          <text class="date-arrow">›</text>
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <!-- 保存 -->
+  <view class="save-bar safe-area-bottom">
+    <button class="save-btn" bindtap="saveBaby" loading="{{saving}}" disabled="{{saving}}">
+      保存
+    </button>
+  </view>
+</view>

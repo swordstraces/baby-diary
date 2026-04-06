@@ -1,0 +1,9 @@
+{
+  "name": "deleteFamily",
+  "version": "1.0.0",
+  "description": "解散家庭（仅管理员可调用，批量删除所有关联数据）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

@@ -1,0 +1,25 @@
+<view class="member-card">
+  <!-- 左侧头像：优先显示上传的头像，否则显示身份表情 -->
+  <view class="member-avatar">
+    <image wx:if="{{cleanAvatar}}" class="avatar-img" src="{{cleanAvatar}}" mode="aspectFill"></image>
+    <text wx:else class="avatar-emoji">{{identityLabel === '未设置身份' ? '👤' : (identityLabel === '爸爸' ? '👨' : identityLabel === '妈妈' ? '👩' : identityLabel === '爷爷' || identityLabel === '外公' ? '👴' : identityLabel === '奶奶' || identityLabel === '外婆' ? '👵' : '🧑‍🍼')}}</text>
+  </view>
+
+  <!-- 中间信息区 -->
+  <view class="member-detail">
+    <view class="member-top">
+      <text class="member-name">{{member.nickname || '未知成员'}}</text>
+      <text class="member-role {{member.role === 'admin' ? 'role-admin' : 'role-member'}}">{{member.role === 'admin' ? '管理员' : '成员'}}</text>
+    </view>
+    <!-- 身份行：只读显示（统一在"我的"页面修改） -->
+    <view class="member-bottom">
+      <text class="member-identity {{identityLabel === '未设置身份' ? 'member-identity-empty' : ''}}">{{identityLabel}}</text>
+    </view>
+  </view>
+
+  <!-- 右侧操作：只有创建者可编辑或移除其他成员 -->
+  <view class="member-action" wx:if="{{isOwner && !isCurrentUser}}">
+    <view class="edit-btn" bindtap="onEdit">编辑</view>
+    <view class="remove-btn" bindtap="onRemove">移除</view>
+  </view>
+</view>

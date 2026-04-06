@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {},
+  "generics": {
+    "selectable": true,
+    "default": "../generic-component/generic-component"
+  }
+}

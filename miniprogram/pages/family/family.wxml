@@ -1,0 +1,114 @@
+<view class="family-page">
+  <!-- 家庭信息卡 -->
+  <view class="family-card" wx:if="{{family}}">
+    <view class="family-header">
+      <view class="family-icon">🏠</view>
+      <view class="family-info">
+        <text class="family-name">{{family.name}}</text>
+        <text class="family-meta">{{members.length}}位成员 · 创建于{{createTimeText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无家庭提示 -->
+  <view class="no-family" wx:if="{{!family}}">
+    <view class="no-family-icon">🏡</view>
+    <text class="no-family-text">创建或加入一个家庭</text>
+    <text class="no-family-desc">邀请家人一起记录宝宝的成长瞬间</text>
+
+    <view class="action-card">
+      <view class="action-item" bindtap="createFamily">
+        <view class="action-icon">🏠</view>
+        <view class="action-content">
+          <text class="action-title">创建家庭</text>
+          <text class="action-desc">我是创建者，邀请家人加入</text>
+        </view>
+        <view class="action-arrow">›</view>
+      </view>
+
+      <view class="action-divider"></view>
+
+      <view class="action-item" bindtap="goToInvite" data-mode="input">
+        <view class="action-icon">🎉</view>
+        <view class="action-content">
+          <text class="action-title">加入家庭</text>
+          <text class="action-desc">输入邀请码加入家人的家庭</text>
+        </view>
+        <view class="action-arrow">›</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 成员列表 -->
+  <view class="section" wx:if="{{family}}">
+    <view class="section-header">
+      <text class="section-title">家庭成员</text>
+    </view>
+
+    <member-card wx:for="{{members}}" wx:key="_id"
+                 member="{{item}}"
+                 isOwner="{{isOwner}}"
+                 currentOpenId="{{currentOpenId}}"
+                 bind:edit="onEditMember"
+                 bind:remove="onRemoveMember" />
+
+    <view class="empty-members" wx:if="{{members.length === 0}}">
+      <text class="empty-text">暂无成员</text>
+    </view>
+  </view>
+
+  <!-- 邀请或加入家庭 -->
+  <view class="section" wx:if="{{family}}">
+    <view class="action-card">
+      <view class="action-item" bindtap="goToInvite">
+        <view class="action-icon">📨</view>
+        <view class="action-content">
+          <text class="action-title">邀请家人</text>
+          <text class="action-desc">生成邀请码分享给家人</text>
+        </view>
+        <view class="action-arrow">›</view>
+      </view>
+
+      <view class="action-divider"></view>
+
+      <view class="action-item" bindtap="goToInvite" data-mode="input">
+        <view class="action-icon">🎉</view>
+        <view class="action-content">
+          <text class="action-title">加入家庭</text>
+          <text class="action-desc">输入邀请码加入家人</text>
+        </view>
+        <view class="action-arrow">›</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 宝宝管理 -->
+  <view class="section" wx:if="{{family}}">
+    <view class="section-header">
+      <text class="section-title">宝宝信息</text>
+      <view class="section-add" bindtap="goToBabyEdit">+ 编辑</view>
+    </view>
+    <view class="baby-card" bindtap="goToBabyEdit">
+      <view class="baby-icon">{{babyInfo.gender === 'male' ? '👦' : '👧'}}</view>
+      <view class="baby-detail">
+        <text class="baby-name">{{babyInfo.name || '未设置'}}</text>
+        <text class="baby-meta">{{babyInfo.birthday || '未设置生日'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 解散家庭（只有创建者可见） -->
+  <view class="section danger-section" wx:if="{{family && isOwner}}">
+    <view class="danger-item" bindtap="dissolveFamily">
+      <text class="danger-text">解散家庭</text>
+    </view>
+  </view>
+
+  <!-- 身份选择器 -->
+  <identity-picker show="{{showIdentityPicker}}"
+                   initialAvatar="{{editingAvatar}}"
+                   initialNickname="{{editingNickname}}"
+                   initialIdentity="{{editingIdentity}}"
+                   bind:confirm="onIdentityConfirm"
+                   bind:cancel="onIdentityCancel" />
+</view>

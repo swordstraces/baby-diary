@@ -1,0 +1,9 @@
+{
+  "name": "generateReport",
+  "version": "1.0.0",
+  "description": "生成每日报告",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

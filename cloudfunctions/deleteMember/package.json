@@ -1,0 +1,9 @@
+{
+  "name": "deleteMember",
+  "version": "1.0.0",
+  "description": "删除成员（管理员可删除同家庭其他成员）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

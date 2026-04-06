@@ -1,0 +1,66 @@
+<view class="mine-page">
+  <!-- 用户信息卡 -->
+  <view class="user-card" bindtap="editIdentity" hover-class="user-card-hover">
+    <view class="user-avatar">
+      <image wx:if="{{userInfo.avatarUrl && userInfo.avatarUrl.length > 0}}" src="{{userInfo.avatarUrl}}" class="avatar-img" mode="aspectFill"></image>
+      <text wx:else class="avatar-emoji">{{identityEmoji}}</text>
+    </view>
+    <view class="user-info">
+      <text class="user-name">{{userInfo.nickname || identityText || '点击设置身份'}}</text>
+      <text class="user-family" wx:if="{{currentFamily}}">🏠 {{currentFamily.name}}</text>
+      <text class="user-family" wx:else>暂未加入家庭</text>
+    </view>
+  </view>
+
+  <!-- 身份选择 ActionSheet（内联方式已移除，改用 wx.showActionSheet） -->
+
+  <!-- 宝宝信息入口 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToBabyEdit">
+      <text class="menu-icon">👶</text>
+      <text class="menu-text">宝宝信息</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goToFamily">
+      <text class="menu-icon">🏠</text>
+      <text class="menu-text">家庭管理</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 设置 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="toggleNotification">
+      <text class="menu-icon">🔔</text>
+      <text class="menu-text">消息提醒</text>
+      <view class="menu-switch {{notification ? 'switch-on' : ''}}">
+        <view class="switch-dot"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goToPrivacy">
+      <text class="menu-icon">🛡️</text>
+      <text class="menu-text">隐私政策</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="exportData">
+      <text class="menu-icon">📤</text>
+      <text class="menu-text">导出数据</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="showAbout">
+      <text class="menu-icon">ℹ️</text>
+      <text class="menu-text">关于宝贝日记</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 版权信息 -->
+  <view class="copyright-info">
+    <text class="copyright-text">宝贝日记 v1.0.0</text>
+    <text class="copyright-text">作者：Phantasy</text>
+  </view>
+</view>

@@ -1,0 +1,99 @@
+.health-form { padding: 0; }
+
+/* 子类型选择 */
+.subtype-grid { display: flex; gap: 16rpx; }
+.subtype-btn {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24rpx 16rpx; border-radius: var(--border-radius-lg);
+  background: var(--bg-primary); border: 2rpx solid transparent;
+  transition: all var(--transition-fast);
+}
+.subtype-btn-active {
+  background: var(--type-health-bg); border-color: #FF6B6B;
+  box-shadow: 0 4rpx 16rpx rgba(255, 107, 107, 0.2);
+}
+.subtype-icon { font-size: 48rpx; margin-bottom: 8rpx; }
+.subtype-text { font-size: var(--font-size-sm); color: var(--text-secondary); }
+.subtype-btn-active .subtype-text { color: #FF6B6B; font-weight: 500; }
+
+/* 体温输入 */
+.temp-input-area {
+  display: flex; align-items: center; gap: 24rpx; justify-content: center;
+  padding: 24rpx 0;
+}
+.temp-control {
+  width: 80rpx; height: 80rpx; border-radius: 50%;
+  background: var(--bg-primary); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06); transition: all var(--transition-fast);
+}
+.temp-control:active { transform: scale(0.92); }
+.temp-btn-text { font-size: 36rpx; color: var(--text-primary); font-weight: 600; }
+.temp-display {
+  display: flex; align-items: baseline; gap: 4rpx;
+  min-width: 200rpx; justify-content: center;
+}
+.temp-value { font-size: 72rpx; font-weight: 700; color: var(--text-primary); }
+.temp-unit { font-size: var(--font-size-sm); color: var(--text-secondary); }
+.temp-quick { display: flex; gap: 12rpx; justify-content: flex-start; margin-top: 16rpx; flex-wrap: wrap; }
+.quick-temp {
+  padding: 10rpx 28rpx; border-radius: var(--border-radius-xl);
+  background: var(--bg-primary); font-size: var(--font-size-sm); color: var(--text-secondary);
+}
+.temp-status {
+  display: flex; align-items: center; gap: 8rpx;
+  padding: 16rpx 20rpx; border-radius: var(--border-radius-md);
+  margin-top: 16rpx;
+}
+.status-normal { background: rgba(78, 205, 196, 0.12); }
+.status-low { background: rgba(124, 131, 253, 0.12); }
+.status-high { background: rgba(255, 107, 107, 0.12); }
+.status-icon { font-size: 28rpx; }
+.status-text { font-size: var(--font-size-xs); }
+.status-normal .status-text { color: #4ECDC4; }
+.status-low .status-text { color: #7C83FD; }
+.status-high .status-text { color: #FF6B6B; }
+
+/* 测量部位 */
+.measure-grid { display: flex; gap: 12rpx; flex-wrap: wrap; }
+.measure-btn {
+  padding: 14rpx 32rpx; border-radius: var(--border-radius-xl);
+  background: var(--bg-primary); font-size: var(--font-size-sm); color: var(--text-secondary);
+  border: 2rpx solid transparent; transition: all var(--transition-fast);
+}
+.measure-btn-active {
+  background: var(--type-health-bg); color: #FF6B6B;
+  border-color: #FF6B6B; font-weight: 500;
+}
+
+/* 通用文本输入 */
+.text-input {
+  width: 100%; height: 80rpx; background: var(--bg-primary);
+  border-radius: var(--border-radius-md); padding: 0 24rpx;
+  font-size: var(--font-size-sm); box-sizing: border-box;
+}
+
+/* 剂量输入 */
+.dose-row { display: flex; gap: 16rpx; align-items: center; }
+.dose-input {
+  flex: 1; height: 80rpx; background: var(--bg-primary);
+  border-radius: var(--border-radius-md); padding: 0 24rpx;
+  font-size: var(--font-size-sm); box-sizing: border-box;
+}
+.dose-unit-btns { display: flex; gap: 8rpx; }
+.unit-btn {
+  padding: 8rpx 16rpx; border-radius: var(--border-radius-md);
+  background: var(--bg-primary); font-size: var(--font-size-xs); color: var(--text-secondary);
+}
+.unit-btn-active { background: var(--type-health-bg); color: #FF6B6B; font-weight: 500; }
+
+/* 疫苗反应 */
+.reaction-grid { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.reaction-btn {
+  padding: 12rpx 24rpx; border-radius: var(--border-radius-xl);
+  background: var(--bg-primary); font-size: var(--font-size-xs); color: var(--text-secondary);
+  border: 2rpx solid transparent; transition: all var(--transition-fast);
+}
+.reaction-btn-active {
+  background: var(--type-health-bg); color: #FF6B6B;
+  border-color: #FF6B6B; font-weight: 500;
+}
